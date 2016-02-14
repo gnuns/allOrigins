@@ -230,7 +230,24 @@ a {
   font-weight: bold; }
 
 .site-footer-credits {
-  color: #819198; }
+  color: #819198; 
+  
+}
+#out-contain {
+	overflow:hidden;
+	position:relative;
+	width:100%;
+	height:250px;
+	zoom:1;
+	border: 1px solid #888;
+}
+#output {
+	width:100%;
+	height:100%;
+}
+#jsonp {
+	width:100%;
+}
 
 @media screen and (min-width: 64em) {
   .site-footer {
