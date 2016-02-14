@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
   </head>
   <body>
     <section class="page-header">
@@ -37,8 +38,51 @@
 
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.pw/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
-});</pre></div>
+});</pre>
+<h3>
+<a id="use-it" class="anchor" href="#use-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
 
+<p>
+  		<form onSubmit="return GoGoGadget();" >
+			<code>http://allorigins.pw/get?url=</code>
+			<input type=textbox id=url><button>Fetch</button>
+		</form>
+		<br>
+
+		<p>Example JQuery Code</p>
+		<textarea id=jsonp rows=4></textarea>
+		<p>Example Output</p>
+		<div id=out-contain>
+		<iframe id=output></iframe>
+		</div>
+</p>
+
+</div>
+		<script>
+		// code from http://anyorigin.com
+		function GoGoGadget() {
+			var jsonpText = "";
+			jsonpText += "$.getJSON('http://allorigins.pw/get?url="+escape($("#url").val())+"&callback=?', function(data){\n";
+			jsonpText += "	$('#output').html(data.contents);\n";
+			jsonpText += "});";
+			$("#jsonp").text(jsonpText);
+			$.getJSON("http://allorigins.pw/get?url="+escape($("#url").val())+"&callback=?", function(data) {
+				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
+				var iframe = $("#output")[0];//.html(data.contents);
+				var doc = iframe.document;
+				if(iframe.contentDocument) {
+					doc = iframe.contentDocument;
+				} else if(iframe.contentWindow) {
+					doc = iframe.contentWindow.document;
+				}
+				doc.open();
+				doc.writeln(data.contents);
+				doc.close();
+			});
+
+			return false;
+		}
+		</script>
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/hezag/allorigins">All Origins</a> is maintained by <a href="https://github.com/hezag">hezag</a>.</span>
 
