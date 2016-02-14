@@ -40,7 +40,7 @@
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
 });</pre>
 
-<br><br>
+<br>
 <h3>
 <a id="try-it" class="anchor" href="#try-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
 
@@ -53,10 +53,15 @@
 
 		<p>Example JQuery Code</p>
 		<textarea id="jsonp" rows=4></textarea>
-		<p>Example Output on iframe</p>
+		<p>Example output on iframe</p>
 		<div id="out-contain">
 		<iframe id="output" style="border:0px;"></iframe>
 		</div>
+		<p>Example json output</p>
+		<div id="out-contain">
+		<textarea id="output-json" rows=4></textarea>
+		</div>
+		
 </p>
 
 </div>
@@ -80,6 +85,7 @@
 				doc.open();
 				doc.writeln(data.contents);
 				doc.close();
+				$('output-json').text(data);
 			});
 
 			return false;
