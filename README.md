@@ -7,7 +7,7 @@ An open source alternative to AnyOrigin.com with support to gzipped pages
 
 A free and open source javascript clone of [AnyOrigin](http://anyorigin.com/), inspired on [Whatever Origin](http://WhateverOrigin.org), but with support to gzipped pages.
 
-**Use it**
+#### Use it
 
 Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from http://google.com with jQuery, use this snippet:
 
@@ -25,7 +25,7 @@ $.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.
 });
 ```
 
-**On your own server**
+#### On your own server
 ```sh
 
 # Clone the repo
