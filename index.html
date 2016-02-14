@@ -39,21 +39,23 @@
 <div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.pw/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
 });</pre>
+
+<br><br>
 <h3>
-<a id="use-it" class="anchor" href="#use-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
+<a id="try-it" class="anchor" href="#try-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
 
 <p>
   		<form onSubmit="return GoGoGadget();" >
-			<code>http://allorigins.pw/get?url=</code>
+			http://allorigins.pw/get?url=
 			<input type=textbox id=url><button>Fetch</button>
 		</form>
 		<br>
 
 		<p>Example JQuery Code</p>
-		<textarea id=jsonp rows=4></textarea>
-		<p>Example Output</p>
-		<div id=out-contain>
-		<iframe id=output></iframe>
+		<textarea id="jsonp" rows=4></textarea>
+		<p>Example Output on iframe</p>
+		<div id="out-contain">
+		<iframe id="output" style="border:0px;"></iframe>
 		</div>
 </p>
 
