@@ -1,0 +1,12 @@
+{
+    "name": "allorigins",
+    "description": "An open source alternative to AnyOrigin.com with support to gzipped pages",
+    "author": "Gabriel Nunes <tohezag@gmail.com>",
+    "version": "0.0.1",
+    "main": "server.js",
+    "license": "MIT",
+    "dependencies": {
+        "express": "~4.0.0",
+        "request": "^2.36.0"
+    }
+}
