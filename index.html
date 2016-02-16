@@ -2,7 +2,7 @@
 <html lang="en-us">
   <head>
     <meta charset="UTF-8">
-    <title>All Origins by hezag</title>
+    <title>All Origins</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
@@ -75,7 +75,7 @@
 			jsonpText += "	$('#output').html(data.contents);\n";
 			jsonpText += "});";
 			$("#jsonp").text(jsonpText);
-			$.getJSON("http://allorigins.pw/get?url="+escape($("#url").val())+"&callback=?", function(data) {
+			$.getJSON("http://allorigins.pw/get?url="+escape(($("#url").val().length > 3 ? $("#url").val() : 'https://archive.org/'))+"&callback=?", function(data) {
 				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
 				var iframe = $("#output")[0];//.html(data.contents);
 				var doc = iframe.document;
