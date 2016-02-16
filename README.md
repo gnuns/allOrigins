@@ -29,7 +29,7 @@ $.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.
 ```sh
 
 # Clone the repo
-git clone https://github.com/hezag/allorigins
+git clone https://github.com/hezag/AllOrigins
 
 # Install dependencies
 cd allorigins
