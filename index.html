@@ -51,7 +51,7 @@
 <p>
   		<form onSubmit="return GoGoGadget();" >
 			http://allorigins.pw/get?url=
-			<input type="textbox" id="url" placeholder="https://archive.org"><button>Fetch</button>
+			<input type="textbox" id="url" value="https://archive.org/"><button>Fetch</button>
 		</form>
 		<br>
 
@@ -75,7 +75,7 @@
 			jsonpText += "	$('#output').html(data.contents);\n";
 			jsonpText += "});";
 			$("#jsonp").text(jsonpText);
-			$.getJSON("http://allorigins.pw/get?url="+escape(($("#url").val().length > 3 ? $("#url").val() : 'https://archive.org/'))+"&callback=?", function(data) {
+			$.getJSON("http://allorigins.pw/get?url="+escape($("#url").val())+"&callback=?", function(data) {
 				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
 				var iframe = $("#output")[0];//.html(data.contents);
 				var doc = iframe.document;
