@@ -44,6 +44,13 @@
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
 });</pre>
 
+
+<p>To get the the raw content (CORS), just add <i>&method=raw</i></p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.pw/get?method=raw&url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
+    <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
+});</pre>
+
 <br>
 <h3>
 <a id="try-it" class="anchor" href="#try-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
