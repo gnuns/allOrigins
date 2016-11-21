@@ -1,7 +1,7 @@
 All Origins
 =======
 
-An open source alternative to AnyOrigin.com with support to gzipped pages
+An open source alternative to AnyOrigin.com with support to gzipped pages and CORS
 
 ***"Same-Origin-Policy? Not on my watch."***
 
@@ -25,6 +25,14 @@ $.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.
 });
 ```
 
+To get the the raw content (CORS), just add ```&method=raw```
+
+```js
+$.getJSON('https://allorigins.pw/get?method=raw&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
+    alert(data.contents);
+});
+```
+
 #### On your own server
 ```sh
 
@@ -36,5 +44,5 @@ cd allorigins
 npm install
 
 # Fire it up!
-node server.js # the default port is 14570
+node server.js # the default port is 1457
 ```
