@@ -28,8 +28,8 @@ $.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.
 To get the the raw content (CORS), just add ```&method=raw```
 
 ```js
-$.getJSON('https://allorigins.pw/get?method=raw&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
-    alert(data.contents);
+$.get('https://allorigins.pw/get?method=raw&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
+    console.log(data);
 });
 ```
 
