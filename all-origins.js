@@ -5,53 +5,74 @@ var config  = require('./config');
 module.exports = {
   processRequest: processRequest
 };
-function isURL(str) {
-		return /^(https?):\/\/((?:[a-z0-9.-]|%[0-9A-F]{2}){3,})(?::(\d+))?((?:\/(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})*)*)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?$/i.test(str);
-}
-if (!String.prototype.startsWith) {
-  String.prototype.startsWith = function(searchString, position) {
-    position = position || 0;
-    return this.indexOf(searchString, position) === position;
-  };
-}
 
 function processRequest(req, res) {
-    var start = new Date(),
-        _url = req.query.url.toString();
-    if(!_url.startsWith('http')) {
-        _url = 'http://' + _url;
-    }
-    if(typeof req.query.url != 'undefined' && req.query.url.length > 6 && isURL(_url)) {
-        request({
-            url: _url,
-            encoding: null,
-            headers: {
-                'User-Agent': config.userAgent
-            }
-        },
-        function(error, response, body) {
-            var _response =
-            {
-                contents: (error != null) ? error.toString() : body.toString(),
-                status: {
-                    'url': unescape(_url),
-                    'content_type': (error != null) ?  '' : response.headers['content-type'],
-                    'http_code': (error != null) ? '0' : response.statusCode,
-                    'response_time': (new Date() - start)
-                }
-            };
+  var start = new Date();
+  var params = req.query;
 
-            if ((error == null) && response.headers['content-encoding'] == 'gzip') {
-                zlib.gunzip(body, function(err, dezipped) {
-                    _response.contents = dezipped.toString();
-                    res.jsonp(_response);
-                });
-            } else {
-                res.jsonp(_response);
-            }
-        });
+  if (isValidURL(params.url)) {
+    getPageContent(params.url)
+    .then(function (page) {
+      res.set('Access-Control-Allow-Origin', '*');
+      res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+      
+      if (params.method  && params.method === 'raw') {
+        res.set('Content-Type', page.response.headers['content-type']);
+        return res.send(page.content);
+      }
+
+      var response = {
+        contents: page.content.toString(),
+        status: {
+          'url': unescape(params.url),
+          'content_type': page.response.headers['content-type'],
+          'http_code': page.response.statusCode,
+          'response_time': (new Date() - start)
+        }
+      };
+      return res.jsonp(response);
+    })
+    .catch((err) => res.status(400).json({'error': err}));
+  } else return res.status(400).json({'error': 'invalid url'});
+}
+
+function getPageContent(url) {
+  return new Promise(resolver);
+
+  function resolver(resolve, reject) {
+    var requesOptions = {
+      'url': url,
+      'encoding': null,
+      'headers': {
+        'User-Agent': config.userAgent
+      }
+    };
+    request(requesOptions, function(error, response) {
+      if (error) return reject(error);
+      processContent(response)
+      .then((res) => resolve(res))
+      .catch((err) => reject(err));
+    });
+  }
+}
+
+function processContent(response) {
+  return new Promise(resolver);
+
+  function resolver(resolve, reject) {
+    var res = {'response': response, 'content': response.body};
+
+    if (response.headers['content-encoding'] == 'gzip') {
+      return zlib.gunzip(res.content, function(err, dezipped) {
+        if (err) return reject(err);
+        resolve(res);
+      });
     }
-    else {
-        res.jsonp({});
-    }
+    resolve(res);
+  }
+}
+
+function isValidURL(str) {
+  if(typeof str === 'undefined' || str.length <= 6) return false;
+	return /^(https?):\/\/((?:[a-z0-9.-]|%[0-9A-F]{2}){3,})(?::(\d+))?((?:\/(?:[a-z0-9-._~!$&'()*+,;=:@]|%[0-9A-F]{2})*)*)(?:\?((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?(?:#((?:[a-z0-9-._~!$&'()*+,;=:\/?@]|%[0-9A-F]{2})*))?$/i.test(str);
 }
