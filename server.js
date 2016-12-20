@@ -3,13 +3,13 @@
  * written by Gabriel 'Hezag' Nunes <tohezag@gmail.com>
  * http://github.com/gnuns
  */
+'use strict';
+const express     = require('express');
+const config      = require('./config');
+const allOrigins  = require('./all-origins');
 
-var express     = require('express');
-var config      = require('./config');
-var allOrigins  = require('./all-origins');
-
-var router = express.Router();
-var app    = express();
+const router = express.Router();
+const app    = express();
 
 start();
 
