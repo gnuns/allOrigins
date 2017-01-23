@@ -13,7 +13,7 @@
   <body>
     <section class="page-header">
       <h1 class="project-name">All Origins</h1>
-      
+
       <a class="github-button" href="https://github.com/gnuns/allorigins" data-icon="octicon-star" data-style="mega" data-count-href="/gnuns/allorigins/stargazers" data-count-api="/repos/gnuns/allorigins#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star gnuns/allorigins on GitHub">Star</a>
       <a class="github-button" href="https://github.com/gnuns/allorigins" data-icon="octicon-eye" data-style="mega" data-count-href="/gnuns/allorigins/watchers" data-count-api="/repos/gnuns/allorigins#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch gnuns/allorigins on GitHub">Watch</a>
       <a class="github-button" href="https://github.com/gnuns" data-style="mega" data-count-href="/gnuns/followers" data-count-api="/users/gnuns#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @gnuns on GitHub">Follow @gnuns</a>
@@ -34,20 +34,20 @@
 
 <p>Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from <a href="http://google.com">http://google.com</a> with jQuery, use this snippet:</p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>http://allorigins.pw/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>http://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>http://allorigins.us/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>http://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
 });</pre></div>
 
 <p>Or via https</p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.pw/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.us/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
 });</pre>
 
 
 <p>To get the the raw content (CORS), just add <i>&method=raw</i></p>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">get</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.pw/get?method=raw&url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
+<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">get</span>(<span class="pl-s"><span class="pl-pds">'</span>https://allorigins.us/get?method=raw&url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
     <span class="pl-en">alert</span>(<span class="pl-smi">data</span>);
 });</pre>
 
@@ -57,7 +57,7 @@
 
 <p>
   		<form onSubmit="return GoGoGadget();" >
-			http://allorigins.pw/get?url=
+			http://allorigins.us/get?url=
 			<input type="textbox" id="url" value="https://archive.org/"><button>Fetch</button>
 		</form>
 		<br>
@@ -70,7 +70,7 @@
 		</div>
 		<p>Example json output</p>
 		<textarea id="output-json" style="width:100%;" rows="4"></textarea>
-		
+
 </p>
 
 </div>
@@ -78,11 +78,11 @@
 		// code from http://anyorigin.com
 		function GoGoGadget() {
 			var jsonpText = "";
-			jsonpText += "$.getJSON('http://allorigins.pw/get?url="+escape($("#url").val())+"&callback=?', function(data){\n";
+			jsonpText += "$.getJSON('http://allorigins.us/get?url="+escape($("#url").val())+"&callback=?', function(data){\n";
 			jsonpText += "	$('#output').html(data.contents);\n";
 			jsonpText += "});";
 			$("#jsonp").text(jsonpText);
-			$.getJSON(document.location.protocol + "//allorigins.pw/get?url="+escape($("#url").val())+"&callback=?", function(data) {
+			$.getJSON(document.location.protocol + "//allorigins.us/get?url="+escape($("#url").val())+"&callback=?", function(data) {
 				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
 				var iframe = $("#output")[0];//.html(data.contents);
 				var doc = iframe.document;
