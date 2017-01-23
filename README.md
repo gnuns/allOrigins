@@ -12,7 +12,7 @@ A free and open source javascript clone of [AnyOrigin](http://anyorigin.com/), i
 Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from http://google.com with jQuery, use this snippet:
 
 ```js
-$.getJSON('http://allorigins.pw/get?url=' + encodeURIComponent('http://google.com') + '&callback=?', function(data){
+$.getJSON('http://allorigins.us/get?url=' + encodeURIComponent('http://google.com') + '&callback=?', function(data){
     alert(data.contents);
 });
 ```
@@ -20,7 +20,7 @@ $.getJSON('http://allorigins.pw/get?url=' + encodeURIComponent('http://google.co
 Or via https
 
 ```js
-$.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
+$.getJSON('https://allorigins.us/get?url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
     alert(data.contents);
 });
 ```
@@ -28,7 +28,7 @@ $.getJSON('https://allorigins.pw/get?url=' + encodeURIComponent('https://google.
 To get the the raw content (CORS), just add ```&method=raw```
 
 ```js
-$.get('https://allorigins.pw/get?method=raw&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
+$.get('https://allorigins.us/get?method=raw&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
     console.log(data);
 });
 ```
@@ -37,7 +37,7 @@ $.get('https://allorigins.pw/get?method=raw&url=' + encodeURIComponent('https://
 ```sh
 
 # Clone the repo
-git clone https://github.com/hezag/AllOrigins
+git clone https://github.com/gnuns/AllOrigins
 
 # Install dependencies
 cd allorigins
