@@ -52,5 +52,5 @@ cd allorigins
 npm install
 
 # Fire it up!
-node server.js # the default port is 1457
+node server.js # the default port is 1458
 ```
