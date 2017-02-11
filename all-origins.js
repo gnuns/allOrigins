@@ -18,12 +18,17 @@ function processRequest(req, res) {
   .then(function (page) {
     res.set('Access-Control-Allow-Origin', '*');
     res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-
+    
     if (params.method  && params.method === 'raw') {
       res.set('Content-Type', page.response.headers['content-type']);
       return res.send(page.content);
+    } else if(params.charset) {
+      res.set('Content-Type', `application/json; charset=${params.charset}`);
+    } else {
+      res.set('Content-Type', 'application/json');
     }
-    return res.jsonp({
+
+    return res.send(JSON.stringify({
       contents: page.content.toString(),
       status: {
         'url': unescape(params.url),
@@ -31,7 +36,7 @@ function processRequest(req, res) {
         'http_code': page.response.statusCode,
         'response_time': (new Date() - start)
       }
-    });
+    }));
   })
   .catch((err) => res.status(400).json({'error': err}));
 }

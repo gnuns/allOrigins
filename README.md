@@ -25,6 +25,14 @@ $.getJSON('https://allorigins.us/get?url=' + encodeURIComponent('https://google.
 });
 ```
 
+You can also set the response character encoding (charset):
+
+```js
+$.getJSON('https://allorigins.us/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com') + '&callback=?', function(data){
+    alert(data.contents);
+});
+```
+
 To get the the raw content (CORS), just add ```&method=raw```
 
 ```js
