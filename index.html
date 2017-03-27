@@ -82,7 +82,7 @@
 			jsonpText += "	$('#output').html(data.contents);\n";
 			jsonpText += "});";
 			$("#jsonp").text(jsonpText);
-			$.getJSON(document.location.protocol + "//allorigins.us/get?url="+escape($("#url").val())+"&callback=?", function(data) {
+			$.getJSON(document.location.protocol + "//allorigins.us/get?url="+escape($("#url").val()), function(data) {
 				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
 				var iframe = $("#output")[0];//.html(data.contents);
 				var doc = iframe.document;
