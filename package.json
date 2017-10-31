@@ -2,7 +2,7 @@
     "name": "allorigins",
     "description": "An open source alternative to AnyOrigin.com with support to gzipped pages",
     "author": "Gabriel Nunes <gabriel@multiverso.me>",
-    "version": "0.1.3",
+    "version": "0.1.5",
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
