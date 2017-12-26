@@ -12,7 +12,7 @@ A free and open source javascript clone of [AnyOrigin](http://anyorigin.com/), i
 Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from http://google.com with jQuery, use this snippet:
 
 ```js
-$.getJSON('http://allorigins.us/get?url=' + encodeURIComponent('http://google.com'), function(data){
+$.getJSON('http://allorigins.me/get?url=' + encodeURIComponent('http://google.com'), function(data){
     alert(data.contents);
 });
 ```
@@ -20,7 +20,7 @@ $.getJSON('http://allorigins.us/get?url=' + encodeURIComponent('http://google.co
 Or via https
 
 ```js
-$.getJSON('https://allorigins.us/get?url=' + encodeURIComponent('https://google.com'), function(data){
+$.getJSON('https://allorigins.me/get?url=' + encodeURIComponent('https://google.com'), function(data){
     alert(data.contents);
 });
 ```
@@ -28,7 +28,7 @@ $.getJSON('https://allorigins.us/get?url=' + encodeURIComponent('https://google.
 You can also set the response character encoding (charset):
 
 ```js
-$.getJSON('https://allorigins.us/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com'), function(data){
+$.getJSON('https://allorigins.me/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com'), function(data){
     alert(data.contents);
 });
 ```
@@ -36,14 +36,14 @@ $.getJSON('https://allorigins.us/get?charset=ISO-8859-1&url=' + encodeURICompone
 To get the the raw content (CORS), just add ```&method=raw```
 
 ```js
-$.get('https://allorigins.us/get?method=raw&url=' + encodeURIComponent('https://google.com'), function(data){
+$.get('https://allorigins.me/get?method=raw&url=' + encodeURIComponent('https://google.com'), function(data){
     console.log(data);
 });
 ```
 
 To use `JSONP` add `&callback=?`:
 ```js
-$.getJSON('https://allorigins.us/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com') + '&callback=?')
+$.getJSON('https://allorigins.me/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com') + '&callback=?')
 .done(function (data) {
   console.log(data.contents);
 });
