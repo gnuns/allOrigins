@@ -1,22 +1,21 @@
 /*!
  * AllOrigins
- * written by Gabriel 'Hezag' Nunes <tohezag@gmail.com>
+ * written by Gabriel Nunes <gabriel@multiverso.me>
  * http://github.com/gnuns
  */
-'use strict';
-const express     = require('express');
-const config      = require('./config');
-const allOrigins  = require('./all-origins');
+const express     = require('express')
+const config      = require('./config')
+const allOrigins  = require('./lib')
 
-const router = express.Router();
-const app    = express();
+const router = express.Router()
+const app    = express()
 
-start();
+start()
 
-function start() {
+function start () {
 
-  router.get('/get', allOrigins.processRequest);
-  app.use(router);
-  app.listen(config.port);
-  console.log('Listening on ' + config.port);
+  router.get('/get', allOrigins.processRequest)
+  app.use(router)
+  app.listen(config.port)
+  console.log('Listening on ' + config.port)
 }
