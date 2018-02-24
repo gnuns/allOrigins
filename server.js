@@ -7,15 +7,15 @@ const express     = require('express')
 const config      = require('./config')
 const allOrigins  = require('./lib')
 
-const router = express.Router()
 const app    = express()
 
 start()
 
 function start () {
+  const port = process.env.PORT || config.port
 
-  router.get('/get', allOrigins.processRequest)
-  app.use(router)
-  app.listen(config.port)
-  console.log('Listening on ' + config.port)
+  app.route('/get').get(allOrigins.processRequest)
+
+  app.listen(port)
+  console.log('Listening on', port)
 }
