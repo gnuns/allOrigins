@@ -1,12 +1,12 @@
 {
     "name": "allorigins",
-    "description": "An open source alternative to AnyOrigin.com with support to gzipped pages",
+    "description": "Pull content from any page as JSON via API",
     "author": "Gabriel Nunes <gabriel@multiverso.me>",
-    "version": "0.1.5",
+    "version": "0.4.2",
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
         "express": "~4.0.0",
-        "request": "^2.36.0"
+        "got": "^8.2.0"
     }
 }
