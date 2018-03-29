@@ -14,7 +14,13 @@ start()
 function start () {
   const port = process.env.PORT || config.port
 
-  app.route('/get').get(allOrigins.processRequest)
+  app.route('/get')
+      .options(function processRequest (req, res) {
+          res.set('Access-Control-Allow-Origin', '*')
+          res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+          res.end()
+      })
+      .get(allOrigins.processRequest)
 
   app.listen(port)
   console.log('Listening on', port)
