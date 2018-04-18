@@ -1,5 +1,6 @@
 All Origins
 =======
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
 
 An open source alternative to AnyOrigin.com with support to gzipped pages and CORS
 
@@ -63,3 +64,7 @@ npm install
 # Fire it up!
 node server.js # the default port is 1458
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_large)
