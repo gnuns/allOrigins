@@ -1,5 +1,6 @@
 All Origins
 =======
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
 
 An open source alternative to AnyOrigin.com with support to gzipped pages and CORS
 
@@ -54,8 +55,6 @@ $.getJSON('https://allorigins.me/get?charset=ISO-8859-1&url=' + encodeURICompone
 ```sh
 
 # Clone the repo
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
-
 git clone https://github.com/gnuns/AllOrigins
 
 # Install dependencies
