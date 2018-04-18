@@ -54,6 +54,8 @@ $.getJSON('https://allorigins.me/get?charset=ISO-8859-1&url=' + encodeURICompone
 ```sh
 
 # Clone the repo
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
+
 git clone https://github.com/gnuns/AllOrigins
 
 # Install dependencies
@@ -63,3 +65,7 @@ npm install
 # Fire it up!
 node server.js # the default port is 1458
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_large)
