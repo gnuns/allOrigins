@@ -17,6 +17,7 @@ function start () {
   app.route('/get')
       .options(function processRequest (req, res) {
           res.set('Access-Control-Allow-Origin', '*')
+          res.set('Access-Control-Allow-Methods', '*')
           res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
           res.end()
       })
