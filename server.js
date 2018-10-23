@@ -13,16 +13,21 @@ start()
 
 function start () {
   const port = process.env.PORT || config.port
+  app.set('case sensitive routing', false)
+  app.disable('x-powered-by')
+  app.use(enableCORS)
 
-  app.route('/get')
-      .options(function processRequest (req, res) {
-          res.set('Access-Control-Allow-Origin', '*')
-          res.set('Access-Control-Allow-Methods', '*')
-          res.set('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
-          res.end()
-      })
-      .get(allOrigins.processRequest)
+  app.all('/req/:format', allOrigins.processRequest)
 
   app.listen(port)
   console.log('Listening on', port)
+}
+
+function enableCORS (req, res, next) {
+  res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
+  res.header('Access-Control-Allow-Credentials', true)
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PATCH, PUT, DELETE')
+  res.header('Via', 'allOrigins')
+  next()
 }
