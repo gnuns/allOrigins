@@ -6,7 +6,7 @@
     "main": "server.js",
     "license": "MIT",
     "dependencies": {
-        "express": "~4.0.0",
+	"express": ">=4.5.0",
         "got": "^8.2.0"
     }
 }
