@@ -40,7 +40,7 @@ function createResponse (page, params, res, startTime) {
     return res.send(page.content)
   }
 
-  if (params.charset) res.set('Content-Type', `application/json charset=${params.charset}`)
+  if (params.charset) res.set('Content-Type', `application/json; charset=${params.charset}`)
   else res.set('Content-Type', 'application/json')
 
   if (page.status) page.status.response_time = (new Date() - startTime)
