@@ -1,8 +1,6 @@
 const getPage  = require('./get-page')
 
-module.exports = {
-  processRequest
-}
+module.exports = processRequest
 
 async function processRequest (req, res) {
   if (req.method === 'OPTIONS') {
@@ -28,8 +26,8 @@ function parseParams (req) {
 
 function parseRequestMethod (method) {
   method = (method || '').toUpperCase()
-  console.log(method)
-  if (['HEAD', 'GET', 'POST', 'PUT', 'DELETE', 'PATCH'].includes(method)) {
+
+  if (['HEAD', 'POST', 'PUT', 'DELETE', 'PATCH'].includes(method)) {
     return method
   }
   return 'GET'

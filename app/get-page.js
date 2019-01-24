@@ -1,5 +1,6 @@
 const got = require('got')
-const config  = require('../config')
+
+const DEFAULT_USER_AGENT = `Mozilla/5.0 (compatible; allOrigins/${global.AO_VERSION}; +http://allorigins.ml/)`
 
 module.exports = getPage
 
@@ -54,7 +55,7 @@ async function request (url, requestMethod) {
     const options = {
       'method': requestMethod,
       'encoding': null,
-      'headers': {'user-agent': process.env.USER_AGENT || config.userAgent}
+      'headers': {'user-agent': process.env.USER_AGENT || DEFAULT_USER_AGENT}
     }
 
     const response = await got(url, options)
