@@ -10,7 +10,7 @@ Pull contents from any page via API (as JSON/P or raw) and avoid [Same-origin po
 
 A free and open source javascript clone of [AnyOrigin](https://web.archive.org/web/20180807170914/http://anyorigin.com/), inspired by [Whatever Origin](http://WhateverOrigin.org), but with support to gzipped pages.
 
-#### Examples
+### Examples
 
 To `fetch` data from http://wikipedia.org:
 
@@ -30,7 +30,7 @@ $.getJSON('https://api.allorigins.ml/get?url=' + encodeURIComponent('https://wik
     alert(data.contents);
 });
 ```
-#### Options
+### Options
 
 ###### charset
 **Description:** Set the response character encoding (charset)  \
@@ -46,7 +46,7 @@ $.getJSON('https://api.allorigins.ml/get?url=' + encodeURIComponent('https://wik
 **Example:** `https://api.allorigins.ml/get?callback=myFunc&url=https://example.org/`
 
 
-#### On your own server
+### On your own server
 ```sh
 
 # Clone the repo
