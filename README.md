@@ -1,54 +1,49 @@
 All Origins
 =======
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
+[![Build Status](https://travis-ci.com/gnuns/AllOrigins.svg?branch=master)](https://travis-ci.com/gnuns/AllOrigins)
 
-An open source alternative to AnyOrigin.com with support to gzipped pages and CORS
+Pull contents from any page via API (as JSON/P or raw) and avoid [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) problems.
 
-***"Same-Origin-Policy? Not on my watch."***
 
-A free and open source javascript clone of [AnyOrigin](http://anyorigin.com/), inspired on [Whatever Origin](http://WhateverOrigin.org), but with support to gzipped pages.
+----
 
-#### Use it
+A free and open source javascript clone of [AnyOrigin](https://web.archive.org/web/20180807170914/http://anyorigin.com/), inspired by [Whatever Origin](http://WhateverOrigin.org), but with support to gzipped pages.
 
-Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from http://google.com with jQuery, use this snippet:
+#### Examples
+
+To `fetch` data from http://wikipedia.org:
 
 ```js
-$.getJSON('http://api.allorigins.ml/get?url=' + encodeURIComponent('http://google.com'), function(data){
+fetch(`https://api.allorigins.ml/get?url=${encodeURIComponent('https://wikipedia.org')}`)
+  .then(response => {
+    if (response.ok) return response.json()
+    throw new Error('Network response was not ok.')
+  })
+  .then(data => console.log(data.contents));
+```
+
+Or with jQuery
+
+```js
+$.getJSON('https://api.allorigins.ml/get?url=' + encodeURIComponent('https://wikipedia.org'), function (data) {
     alert(data.contents);
 });
 ```
+#### Options
 
-Or via https
+###### charset
+**Description:** Set the response character encoding (charset)  \
+**Example:** `https://api.allorigins.ml/get?charset=ISO-8859-1&url=https://pt.wikipedia.org/`
 
-```js
-$.getJSON('https://api.allorigins.ml/get?url=' + encodeURIComponent('https://google.com'), function(data){
-    alert(data.contents);
-});
-```
 
-You can also set the response character encoding (charset):
+###### raw
+**Description:** Get the raw contents ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS))  \
+**Example:** `https://api.allorigins.ml/raw?url=https://example.org/`
 
-```js
-$.getJSON('https://api.allorigins.ml/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com'), function(data){
-    alert(data.contents);
-});
-```
-
-To get the the raw content (CORS), just use ```/raw``` instead of `/get`
-
-```js
-$.get('https://api.allorigins.ml/raw?url=' + encodeURIComponent('https://google.com'), function(data){
-    console.log(data);
-});
-```
-
-To use `JSONP` add `&callback=?`:
-```js
-$.getJSON('https://api.allorigins.ml/get?charset=ISO-8859-1&url=' + encodeURIComponent('https://google.com') + '&callback=?')
-.done(function (data) {
-  console.log(data.contents);
-});
-```
+###### callback
+**Description:** Get a [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) response  \
+**Example:** `https://api.allorigins.ml/get?callback=myFunc&url=https://example.org/`
 
 
 #### On your own server
