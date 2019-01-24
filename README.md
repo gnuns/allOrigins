@@ -34,10 +34,10 @@ $.getJSON('https://api.allorigins.ml/get?charset=ISO-8859-1&url=' + encodeURICom
 });
 ```
 
-To get the the raw content (CORS), just add ```&method=raw```
+To get the the raw content (CORS), just use ```/raw``` instead of `/get`
 
 ```js
-$.get('https://api.allorigins.ml/get?method=raw&url=' + encodeURIComponent('https://google.com'), function(data){
+$.get('https://api.allorigins.ml/raw?url=' + encodeURIComponent('https://google.com'), function(data){
     console.log(data);
 });
 ```
