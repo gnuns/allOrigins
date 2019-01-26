@@ -1,124 +1,242 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>All Origins</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@9.13.1/build/styles/default.min.css,npm/bulma@0.4.0/css/bulma.min.css"
+    />
+    <style>
+      /* template base by: github.com/plasticneko */
+      /* bulma css framework by jeremy thomas (github.com/jgthms | bulma.io) */
+
+      .button {
+        padding: 20px;
+      }
+
+      pre {
+        white-space: pre-wrap;
+      }
+
+      .pre-wrapper {
+        padding-bottom: 20px;
+      }
+
+      .header-titles {
+        padding-bottom: 50px;
+      }
+
+      .content .main-text p:last-child {
+        padding-bottom: 30px;
+      }
+    </style>
   </head>
   <body>
-    <section class="page-header">
-      <h1 class="project-name">All Origins</h1>
+    
+    <div class="hero-head">
+      <section class="hero is-dark is-small" id="contact">
+        <div class="hero-body">
+          <div class="container">
+            <div class="header-titles">
+              <h3 class="title is-3 is-spaced">allOrigins</h3>
+              <h5 class="subtitle is-5 is-spaced">
+                Pull contents from any page via API (as JSON/P or raw) and avoid Same-origin policy problems.
+              </h5>
+            </div>
+            <div class="header-buttons">
+              <span class="control">
+                <a
+                  class="button is-dark is-inverted is-outlined"
+                  href="https://github.com/gnuns/allorigins"
+                >
+                  <span class="icon"> <i class="fab fa-github"></i> </span>
+                  <span>Github</span>
+                </a>
+              </span>
+              <span class="control">
+                <a class="button is-dark is-inverted is-outlined" href="https://github.com/gnuns/allorigins/issues">
+                  <span class="icon"> <i class="fa fa-bug"></i> </span>
+                  <span>Report Bug</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+    
 
-      <a class="github-button" href="https://github.com/gnuns/allorigins" data-icon="octicon-star" data-style="mega" data-count-href="/gnuns/allorigins/stargazers" data-count-api="/repos/gnuns/allorigins#stargazers_count" data-count-aria-label="# stargazers on GitHub" aria-label="Star gnuns/allorigins on GitHub">Star</a>
-      <a class="github-button" href="https://github.com/gnuns/allorigins" data-icon="octicon-eye" data-style="mega" data-count-href="/gnuns/allorigins/watchers" data-count-api="/repos/gnuns/allorigins#subscribers_count" data-count-aria-label="# watchers on GitHub" aria-label="Watch gnuns/allorigins on GitHub">Watch</a>
-      <a class="github-button" href="https://github.com/gnuns" data-style="mega" data-count-href="/gnuns/followers" data-count-api="/users/gnuns#followers" data-count-aria-label="# followers on GitHub" aria-label="Follow @gnuns on GitHub">Follow @gnuns</a>
-      <h2 class="project-tagline">An open source alternative to AnyOrigin.com with support to gzipped pages</h2>
-      <a href="https://github.com/gnuns/allorigins" class="btn">View on GitHub</a>
-      <a href="https://github.com/gnuns/allorigins/zipball/master" class="btn">Download .zip</a>
-      <a href="https://github.com/gnuns/allorigins/tarball/master" class="btn">Download .tar.gz</a>
-    </section>
+    
+    <div class="content-block">
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <div class="content">
+              <div class="main-text">
+                <p>A free and open source javascript <a href="https://web.archive.org/web/20180807170914/http://anyorigin.com/" rel="nofollow">AnyOrigin</a> alternative, inspired by <a href="http://WhateverOrigin.org" rel="nofollow">Whatever Origin</a>, but with gzipped pages support.</p>
+              </div>
+              <h4 class="title is-4 is-spaced">Examples</h4>
+              <div class="columns is-multiline">
+                  <div class="column is-6">
+              <div class="pre-wrapper">
+                  <p>To <code>fetch</code> data from <a href="http://wikipedia.org">http://wikipedia.org</a>:</p>
+                  <pre><code class="language-js">fetch(<span class="hljs-string">`https://api.allorigins.ml/get?url=<span class="hljs-subst">${encodeURIComponent('https://wikipedia.org')}</span>`</span>)
+                    .then(response =&gt; {
+                      <span class="hljs-keyword">if</span> (response.ok) <span class="hljs-keyword">return</span> response.json()
+                      <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Network response was not ok.'</span>)
+                    })
+                    .then(data =&gt; <span class="hljs-built_in">console</span>.log(data.contents));
+                  </code></pre>
+              </div>
+              </div>
+                  <div class="column is-6">
+              <div class="pre-wrapper">
+                  <p>Or with jQuery</p>
+                  <pre><code class="language-js">$.getJSON(<span class="hljs-string">'https://api.allorigins.ml/get?url='</span> + <span class="hljs-built_in">encodeURIComponent</span>(<span class="hljs-string">'https://wikipedia.org'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+                      alert(data.contents);
+                  });
+                  </code></pre>
+              </div>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr />
+    </div>
+    
 
-    <section class="main-content">
-      <h3>
-<a id="same-origin-policy-not-on-my-watch" class="anchor" href="#same-origin-policy-not-on-my-watch" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>"Same-Origin-Policy? Not on my watch."</h3>
+    
+    <div class="content-block">
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <div class="content">
+              <h3 class="title is-3">Options</h4>
+              <div class="pre-wrapper">
+                  <h4><a id="charset_34"></a>charset</h4>
+                  <p><strong>Description:</strong> Set the response character encoding (charset)  <br>
+                  <strong>Example:</strong> <code>https://api.allorigins.ml/get?charset=ISO-8859-1&amp;url=https://pt.wikipedia.org/</code></p>
+                  <hr>
+                  <h4><a id="raw_39"></a>raw</h4>
+                  <p><strong>Description:</strong> Get the raw contents (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>)  <br>
+                  <strong>Example:</strong> <code>https://api.allorigins.ml/raw?url=https://example.org/</code></p>
+                  <hr>
+                  <h4><a id="callback_43"></a>callback</h4>
+                  <p><strong>Description:</strong> Get a <a href="https://www.w3schools.com/js/js_json_jsonp.asp">JSONP</a> response  <br>
+                  <strong>Example:</strong> <code>https://api.allorigins.ml/get?callback=myFunc&amp;url=https://example.org/</code></p>
+              </div>
+            
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr />
+    </div>
+    
 
-<p>A free and open source clone of <a href="http://anyorigin.com/">AnyOrigin</a>, inspired on <a href="http://www.whateverorigin.org/">Whatever Origin</a>, but with support to gzipped pages.</p>
+    
+    <div class="content-block">
+      <section class="hero">
+        <div class="hero-body">
+          <div class="container">
+            <div class="content">
+              <h4 class="title is-4">Try it yourself!</h4>
+              <div class="main-text">
+                      
+                      <p>
+                            <form onSubmit="return GoGoGadget();" >
+                            http://api.allorigins.ml/get?url=
+                            <input class="input" type="text" id="url" value="https://archive.org/" /><button class="button is-dark">Fetch</button>
+                          </form>
+                          <br>
+                      
+                          <p>Example JQuery Code</p>
+                          <p>
 
-<h3>
-<a id="use-it" class="anchor" href="#use-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Use it</h3>
+                            <textarea id="jsonp" rows="4"  style="width:100%;"></textarea>
+                          </p>
+                          <p>Example json output</p>
+                          <p>
+                            <textarea id="output-json" style="width:100%;" rows="4"></textarea>
+                          </p>
+                          <p>Example output on iframe</p>
+                          <p>
+                            <iframe id="output" style="border:1px solid; width: 100%; height: 250px"></iframe>
+                          </p>
+                      
+                      </p>
+                      
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <hr />
+    </div>
+    
 
-<p>Usage is similar to anyorigin and whateverorigin. For example, to fetch the data from <a href="http://google.com">http://google.com</a> with jQuery, use this snippet:</p>
+    
+    <div class="hero-footer footer">
+      <div class="container has-text-centered">
+        <span class="icon"> <i class="fab fa-github"></i> </span>
+        <p>template by <a></a></p>
+      </div>
+    </div>
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>http://api.allorigins.ml/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>http://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
-    <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
-});</pre></div>
+    <script>
+        function GoGoGadget () {
+          var url = document.getElementById('url');
+          var jsonp = document.getElementById('jsonp');
+          var jsonpText = '';
 
-<p>Or via https</p>
+          jsonpText += "$.getJSON('http://api.allorigins.ml/get?url="+escape(url.value)+"&callback=?', function(data){\n";
+          jsonpText += "	$('#output').html(data.contents);\n";
+          jsonpText += "});";
+          
+          jsonp.textContent = jsonpText;
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">getJSON</span>(<span class="pl-s"><span class="pl-pds">'</span>https://api.allorigins.ml/get?url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
-    <span class="pl-en">alert</span>(<span class="pl-smi">data</span>.<span class="pl-smi">contents</span>);
-});</pre>
+          var xmlhttp = new XMLHttpRequest();
+
+          xmlhttp.onreadystatechange = function () {
+              if (this.readyState == 4 && this.status == 200) {
+                  var myArr = JSON.parse(this.responseText);
+                  updatePreview(myArr);
+              }
+          };
+
+          xmlhttp.open('GET', document.location.protocol + '//api.allorigins.ml/get?url='+escape(url.value, true));
+          xmlhttp.send();
 
 
-<p>To get the the raw content (CORS), just add <i>&method=raw</i></p>
+          function updatePreview (data) {
+            var outputJSON = document.getElementById('output-json');
+            var iframe = document.getElementById('output');
+            var doc = iframe.document;
 
-<div class="highlight highlight-source-js"><pre><span class="pl-smi">$</span>.<span class="pl-en">get</span>(<span class="pl-s"><span class="pl-pds">'</span>https://api.allorigins.ml/get?method=raw&url=<span class="pl-pds">'</span></span> <span class="pl-k">+</span> <span class="pl-c1">encodeURIComponent</span>(<span class="pl-s"><span class="pl-pds">'</span>https://google.com<span class="pl-pds">'</span></span>) <span class="pl-k">+</span> <span class="pl-s"><span class="pl-pds">'</span>&amp;callback=?<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">data</span>){
-    <span class="pl-en">alert</span>(<span class="pl-smi">data</span>);
-});</pre>
+            if(iframe.contentDocument) {
+              doc = iframe.contentDocument;
+            } else if(iframe.contentWindow) {
+              doc = iframe.contentWindow.document;
+            }
+            doc.open();
+            doc.writeln(data.contents);
+            doc.close();
+            
+            outputJSON.textContent = JSON.stringify(data);
+          }
+          return false;
+        }
+    </script>
 
-<br>
-<h3>
-<a id="try-it" class="anchor" href="#try-it" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Try it yourself!</h3>
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.6.3/js/all.js"
+      integrity="sha384-EIHISlAOj4zgYieurP0SdoiBYfGJKkgWedPHH4jCzpCXLmzVsw1ouK59MuUtP4a1"
+      crossorigin="anonymous"
+    ></script>
 
-<p>
-  		<form onSubmit="return GoGoGadget();" >
-			http://api.allorigins.ml/get?url=
-			<input type="textbox" id="url" value="https://archive.org/"><button>Fetch</button>
-		</form>
-		<br>
-
-		<p>Example JQuery Code</p>
-		<textarea id="jsonp" rows=4></textarea>
-		<p>Example output on iframe</p>
-		<div id="out-contain">
-		<iframe id="output" style="border:0px;"></iframe>
-		</div>
-		<p>Example json output</p>
-		<textarea id="output-json" style="width:100%;" rows="4"></textarea>
-
-</p>
-
-</div>
-		<script>
-		// code from http://anyorigin.com
-		function GoGoGadget() {
-			var jsonpText = "";
-			jsonpText += "$.getJSON('http://api.allorigins.ml/get?url="+escape($("#url").val())+"&callback=?', function(data){\n";
-			jsonpText += "	$('#output').html(data.contents);\n";
-			jsonpText += "});";
-			$("#jsonp").text(jsonpText);
-			$.getJSON(document.location.protocol + "//api.allorigins.ml/get?url="+escape($("#url").val()), function(data) {
-				// This iframe sillyness is to put the html into a css sandbox (so it doesn't affect the main website)
-				var iframe = $("#output")[0];//.html(data.contents);
-				var doc = iframe.document;
-				if(iframe.contentDocument) {
-					doc = iframe.contentDocument;
-				} else if(iframe.contentWindow) {
-					doc = iframe.contentWindow.document;
-				}
-				doc.open();
-				doc.writeln(data.contents);
-				doc.close();
-				$('#output-json').text(JSON.stringify(data));
-			});
-
-			return false;
-		}
-		</script>
-      <footer class="site-footer">
-        <span class="site-footer-owner"><a href="https://github.com/gnuns/allorigins">All Origins</a> is maintained by <a href="https://github.com/gnuns">gnuns</a>.</span>
-
-        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
-      </footer>
-
-    </section>
-
-            <script type="text/javascript">
-            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-          </script>
-          <script type="text/javascript">
-            try {
-              var pageTracker = _gat._getTracker("UA-50418271-4");
-            pageTracker._trackPageview();
-            } catch(err) {}
-          </script>
-
-<script async defer id="github-bjs" src="https://buttons.github.io/buttons.js"></script>
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.13.1/build/highlight.min.js"></script>
   </body>
 </html>
