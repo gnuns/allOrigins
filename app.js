@@ -7,11 +7,11 @@
 const express = require('express')
 
 const {version} = require('./package.json')
-const processRequest  = require('./app/process-request')
-
 // yep, global. it's ok
 // https://softwareengineering.stackexchange.com/a/47926/289420
 global.AO_VERSION = version
+
+const processRequest  = require('./app/process-request')
 
 const app = express()
 
