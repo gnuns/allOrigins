@@ -1,7 +1,7 @@
 All Origins
 =======
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fgnuns%2FAllOrigins?ref=badge_shield)
-[![Build Status](https://travis-ci.com/gnuns/AllOrigins.svg?branch=master)](https://travis-ci.com/gnuns/AllOrigins)
+[![Build Status](https://travis-ci.com/gnuns/allOrigins.svg?branch=master)](https://travis-ci.com/gnuns/allOrigins)
 
 Pull contents from any page via API (as JSON/P or raw) and avoid [Same-origin policy](https://en.wikipedia.org/wiki/Same-origin_policy) problems.
 
