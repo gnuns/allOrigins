@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <title>All Origins</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Pull contents from any page via API (as JSON/P or raw) and avoid Same-origin policy problems.">
+    
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/combine/gh/highlightjs/cdn-release@9.13.1/build/styles/default.min.css,npm/bulma@0.4.0/css/bulma.min.css"
     />
     <style>
@@ -80,7 +82,7 @@
                   <div class="column is-6">
               <div class="pre-wrapper">
                   <p>To <code>fetch</code> data from <a href="http://wikipedia.org">http://wikipedia.org</a>:</p>
-                  <pre><code class="language-js">fetch(<span class="hljs-string">`https://api.allorigins.ml/get?url=<span class="hljs-subst">${encodeURIComponent('https://wikipedia.org')}</span>`</span>)
+                  <pre><code class="language-js">fetch(<span class="hljs-string">`https://api.allorigins.win/get?url=<span class="hljs-subst">${encodeURIComponent('https://wikipedia.org')}</span>`</span>)
                     .then(response =&gt; {
                       <span class="hljs-keyword">if</span> (response.ok) <span class="hljs-keyword">return</span> response.json()
                       <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-built_in">Error</span>(<span class="hljs-string">'Network response was not ok.'</span>)
@@ -92,7 +94,7 @@
                   <div class="column is-6">
               <div class="pre-wrapper">
                   <p>Or with jQuery</p>
-                  <pre><code class="language-js">$.getJSON(<span class="hljs-string">'https://api.allorigins.ml/get?url='</span> + <span class="hljs-built_in">encodeURIComponent</span>(<span class="hljs-string">'https://wikipedia.org'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
+                  <pre><code class="language-js">$.getJSON(<span class="hljs-string">'https://api.allorigins.win/get?url='</span> + <span class="hljs-built_in">encodeURIComponent</span>(<span class="hljs-string">'https://wikipedia.org'</span>), <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params">data</span>) </span>{
                       alert(data.contents);
                   });
                   </code></pre>
@@ -117,15 +119,15 @@
               <div class="pre-wrapper">
                   <h4><a id="charset_34"></a>charset</h4>
                   <p><strong>Description:</strong> Set the response character encoding (charset)  <br>
-                  <strong>Example:</strong> <code>https://api.allorigins.ml/get?charset=ISO-8859-1&amp;url=https://pt.wikipedia.org/</code></p>
+                  <strong>Example:</strong> <code>https://api.allorigins.win/get?charset=ISO-8859-1&amp;url=https://pt.wikipedia.org/</code></p>
                   <hr>
                   <h4><a id="raw_39"></a>raw</h4>
                   <p><strong>Description:</strong> Get the raw contents (<a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS</a>)  <br>
-                  <strong>Example:</strong> <code>https://api.allorigins.ml/raw?url=https://example.org/</code></p>
+                  <strong>Example:</strong> <code>https://api.allorigins.win/raw?url=https://example.org/</code></p>
                   <hr>
                   <h4><a id="callback_43"></a>callback</h4>
                   <p><strong>Description:</strong> Get a <a href="https://www.w3schools.com/js/js_json_jsonp.asp">JSONP</a> response  <br>
-                  <strong>Example:</strong> <code>https://api.allorigins.ml/get?callback=myFunc&amp;url=https://example.org/</code></p>
+                  <strong>Example:</strong> <code>https://api.allorigins.win/get?callback=myFunc&amp;url=https://example.org/</code></p>
               </div>
             
             </div>
@@ -147,16 +149,15 @@
                       
                       <p>
                             <form onSubmit="return GoGoGadget();" >
-                            http://api.allorigins.ml/get?url=
+                            http://api.allorigins.win/get?url=
                             <input class="input" type="text" id="url" value="https://archive.org/" /><button class="button is-dark">Fetch</button>
                           </form>
                           <br>
                       
-                          <p>Example JQuery Code</p>
+                          <p>Example code</p>
                           <p>
 
-                            <textarea id="jsonp" rows="4"  style="width:100%;"></textarea>
-                          </p>
+                            <pre><code class="js" id="jsonp">...</code></pre>                          </p>
                           <p>Example json output</p>
                           <p>
                             <textarea id="output-json" style="width:100%;" rows="4"></textarea>
@@ -180,8 +181,12 @@
     
     <div class="hero-footer footer">
       <div class="container has-text-centered">
+        <a
+          href="https://github.com/gnuns/allorigins"
+        >
         <span class="icon"> <i class="fab fa-github"></i> </span>
-        <p>template by <a></a></p>
+        </a>
+        <p>by <a href="https://multiverso.me/">gnuns</a></p>
       </div>
     </div>
 
@@ -191,11 +196,21 @@
           var jsonp = document.getElementById('jsonp');
           var jsonpText = '';
 
-          jsonpText += "$.getJSON('http://api.allorigins.ml/get?url="+escape(url.value)+"&callback=?', function(data){\n";
-          jsonpText += "	$('#output').html(data.contents);\n";
-          jsonpText += "});";
+          jsonpText += "// with fetch\n";
+          jsonpText += "fetch(`https://api.allorigins.win/get?url=${encodeURIComponent('"+url.value+"')}`)\n";
+          jsonpText += ".then(response => {\n";
+          jsonpText += "\tif (response.ok) return response.json()\n";
+          jsonpText += "\tthrow new Error('Network response was not ok.')\n";
+          jsonpText += "})\n";
+          jsonpText += ".then(data => console.log(data.contents));\n\n";
+
+          jsonpText += "// with JQuery\n";
+          jsonpText += "$.getJSON('http://api.allorigins.win/get?url="+escape(url.value)+"&callback=?', function (data) {\n";
+          jsonpText += "\t$('#output').html(data.contents);\n";
+          jsonpText += "});\n";
           
           jsonp.textContent = jsonpText;
+          hljs.highlightBlock(jsonp);
 
           var xmlhttp = new XMLHttpRequest();
 
@@ -206,7 +221,7 @@
               }
           };
 
-          xmlhttp.open('GET', document.location.protocol + '//api.allorigins.ml/get?url='+escape(url.value, true));
+          xmlhttp.open('GET', document.location.protocol + '//api.allorigins.win/get?url='+escape(url.value, true));
           xmlhttp.send();
 
 
