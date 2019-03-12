@@ -7,7 +7,7 @@
   "license": "MIT",
   "scripts": {
     "test": "npm run eslint && jest --coverage",
-    "publish-version": "./.update-version.sh && git push origin master && npm publish",
+    "push": "vpdate && git push",
     "eslint": "eslint -c .eslintrc.json ./app"
   },
   "dependencies": {
