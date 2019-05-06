@@ -36,7 +36,6 @@ $.getJSON('https://api.allorigins.win/get?url=' + encodeURIComponent('https://wi
 **Description:** Set the response character encoding (charset)  \
 **Example:** `https://api.allorigins.win/get?charset=ISO-8859-1&url=https://pt.wikipedia.org/`
 
-
 ###### raw
 **Description:** Get the raw contents ([CORS](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS))  \
 **Example:** `https://api.allorigins.win/raw?url=https://example.org/`
@@ -44,6 +43,10 @@ $.getJSON('https://api.allorigins.win/get?url=' + encodeURIComponent('https://wi
 ###### callback
 **Description:** Get a [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) response  \
 **Example:** `https://api.allorigins.win/get?callback=myFunc&url=https://example.org/`
+
+###### Images  (A New Feature)
+**Description:** Get an object with an array of all images ( {urls:[]} )  \
+**Example:** `http://localhost:1458//images?url=https://example.org/`
 
 
 ### On your own server
