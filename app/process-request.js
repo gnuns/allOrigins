@@ -1,4 +1,14 @@
+/*
+
+Using helpers.getImageUrls function to grab image urls form page and return the array of urls.
+Modified by: Abdelmajid Abdellatif
+
+*/
+
 const getPage  = require('./get-page')
+
+//Require helpers
+const helpers = require('../helpers/helpers')
 
 module.exports = processRequest
 
@@ -10,6 +20,7 @@ async function processRequest (req, res) {
   const startTime = new Date()
   const params = parseParams(req)
   const page = await getPage(params)
+
   return createResponse(page, params, res, startTime)
 }
 
@@ -34,6 +45,13 @@ function parseRequestMethod (method) {
 }
 
 function createResponse (page, params, res, startTime) {
+  //if format is images return object with image (urls) array
+  if (params.format === 'images'){
+    res.set('Content-Type', 'application/json')
+    const imageUrls = helpers.getImageUrls(page.contents)
+    return res.send({'urls': imageUrls})
+  }
+
   if (params.format === 'raw' && !(page.status || {}).error) {
     res.set('Content-Length', page.contentLength)
     res.set('Content-Type', page.contentType)

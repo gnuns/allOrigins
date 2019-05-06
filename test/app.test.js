@@ -1,8 +1,19 @@
+/*
+
+Test is modified. New tests are:
+- Test if helpers.getImageUrls(html) return array of urls
+- Test if format images return object with contains urls array
+
+Modified by: Abdelmajid Abdellatif
+
+*/
+
 const request = require('supertest')
 const nock = require('nock')
 const app = require('../app.js')
 
-
+//Require helpers
+const helpers = require('../helpers/helpers')
 
 beforeAll(() => {
   nock('http://example.com')
@@ -98,4 +109,31 @@ test('Test OPTIONS request', async (done) => {
   expect(res.body.contents).toBeUndefined()
 
   done()
+})
+
+
+
+/**
+ * Modifications
+ */
+
+//Test if helpers.getImageUrls(html) return array of urls
+test(`helpers.getImageUrls("<img src='https://example.com/example.png' />") return an object 
+with urls array contains 'https://example.com/example.png' `, (done) => {
+
+    expectedArray = ['https://example.com/example.png']
+    expect(helpers.getImageUrls("<img src='https://example.com/example.png' />")).toEqual(expectedArray)
+
+    done();
+});
+
+//Test if format images return object with contains urls array
+test('Test /images request', async (done) => {
+  const res = await request(app).get('/images?url=http://example.com/test.html')
+
+  expect(res.statusCode).toBe(200)
+  expect(res.body.contents).toBeUndefined()
+  expect(Array.isArray(res.body.urls)).toBe(true)
+
+  done();
 })
