@@ -2,17 +2,20 @@
   "name": "allorigins",
   "description": "Pull contents from any page as JSON via API",
   "author": "Gabriel Nunes <gabriel@multiverso.me>",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "main": "server.js",
   "license": "MIT",
   "scripts": {
     "test": "npm run eslint && jest --coverage",
     "push": "vpdate && git push",
-    "eslint": "eslint -c .eslintrc.json ./app"
+    "eslint": "eslint -c .eslintrc.json ./app",
+    "start": "node server.js"
   },
   "dependencies": {
+    "acorn": "^6.1.1",
     "express": ">=4.5.0",
-    "got": "^9.6.0"
+    "got": "^9.6.0",
+    "memory-cache": "^0.2.0"
   },
   "devDependencies": {
     "eslint": "^5.15.1",
@@ -20,5 +23,16 @@
     "nock": "^10.0.6",
     "supertest": "^4.0.0",
     "vpdate": "^0.1.0"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MichaelGuardian/allOrigins.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MichaelGuardian/allOrigins/issues"
+  },
+  "homepage": "https://github.com/MichaelGuardian/allOrigins#readme"
 }

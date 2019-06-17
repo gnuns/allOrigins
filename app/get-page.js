@@ -1,4 +1,5 @@
 const got = require('got')
+const mcache = require('memory-cache')
 
 const DEFAULT_USER_AGENT = `Mozilla/5.0 (compatible; allOrigins/${global.AO_VERSION}; +http://allorigins.ml/)`
 
@@ -35,8 +36,13 @@ async function getRawPage (url, requestMethod) {
 }
 
 async function getPageContents (url, requestMethod) {
-  const {content, response, error} = await request(url, requestMethod)
-  if (error) return processError(error)
+  let key = '__express__' + url
+  let cachedBody = mcache.get(key)
+  var duration = 3600
+  if (key === '__express__https://www.wuxiaworld.co/all/') (duration *= 24)
+  if (cachedBody){
+    const {content, response, error} = cachedBody
+    if (error) return processError(error)
 
   const contentLength = Buffer.byteLength(content)
   return {
@@ -47,6 +53,23 @@ async function getPageContents (url, requestMethod) {
       'content_length': contentLength,
       'http_code': response.statusCode,
     }
+  }
+  } else {
+    const {content, response, error} = await request(url, requestMethod)
+    mcache.put(key, {content, response, error}, duration*1000)
+
+    if (error) return processError(error)
+
+  const contentLength = Buffer.byteLength(content)
+  return {
+    contents: content.toString(),
+    status: {
+      'url': url,
+      'content_type': response.headers['content-type'],
+      'content_length': contentLength,
+      'http_code': response.statusCode,
+    }
+  }
   }
 }
 
