@@ -5,6 +5,9 @@
  */
 
 const express = require('express')
+const fs = require('fs')
+const morgan = require('morgan')
+const path = require('path')
 
 const {version} = require('./package.json')
 // yep, global. it's ok
@@ -14,6 +17,9 @@ global.AO_VERSION = version
 const processRequest  = require('./app/process-request')
 
 const app = express()
+
+var accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
+app.use(morgan('tiny', {stream: accessLogStream}))
 
 app.set('case sensitive routing', false)
 app.disable('x-powered-by')
