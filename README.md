@@ -53,7 +53,7 @@ $.getJSON('https://api.allorigins.win/get?url=' + encodeURIComponent('https://wi
 git clone https://github.com/gnuns/AllOrigins
 
 # Install dependencies
-cd AllOrigins
+cd allOrigins
 npm install
 
 # Fire it up!
