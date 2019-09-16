@@ -15,8 +15,8 @@
     "got": "^9.6.0"
   },
   "devDependencies": {
-    "eslint": "^6.0.1",
-    "jest": "^24.8.0",
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0",
     "nock": "^10.0.6",
     "supertest": "^4.0.2",
     "vpdate": "^0.1.1"
