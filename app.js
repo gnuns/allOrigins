@@ -31,7 +31,7 @@ app.all('/:format', processRequest)
 function enableCORS (req, res, next) {
   res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
   res.header('Access-Control-Allow-Credentials', true)
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept')
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Content-Encoding, Accept')
   res.header('Access-Control-Allow-Methods', 'OPTIONS, GET, POST, PATCH, PUT, DELETE')
   res.header('Via', `allOrigins v${version}`)
   next()

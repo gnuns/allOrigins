@@ -2,7 +2,8 @@
   "name": "allorigins",
   "description": "Pull contents from any page as JSON via API",
   "author": "Gabriel Nunes <gabriel@multiverso.me>",
-  "version": "2.0.6",
+
+  "version": "2.0.7",
   "main": "server.js",
   "license": "MIT",
   "scripts": {
@@ -12,18 +13,18 @@
     "start": "node server.js"
   },
   "dependencies": {
+
     "acorn": "^6.1.1",
     "express": ">=4.5.0",
     "got": "^9.6.0",
     "memory-cache": "^0.2.0",
     "morgan": "^1.9.1"
-  },
   "devDependencies": {
-    "eslint": "^5.15.1",
-    "jest": "^24.5.0",
+    "eslint": "^6.4.0",
+    "jest": "^24.9.0",
     "nock": "^10.0.6",
-    "supertest": "^4.0.0",
-    "vpdate": "^0.1.0"
+    "supertest": "^4.0.2",
+    "vpdate": "^0.1.1"
   },
   "directories": {
     "test": "test"
