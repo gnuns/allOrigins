@@ -8,14 +8,14 @@ function getPage ({url, format, requestMethod}) {
   if (format === 'info' || requestMethod === 'HEAD') {
      return getPageInfo(url)
   } else if (format === 'raw') {
-    return getRawPage(encodeURI(url), requestMethod)
+    return getRawPage(url, requestMethod)
   }
 
   return getPageContents(url, requestMethod)
 }
 
 async function getPageInfo (url) {
-  const {response, error} = await request(encodeURI(url), 'HEAD')
+  const {response, error} = await request(url, 'HEAD')
   if (error) return processError(error)
 
   return {
@@ -27,7 +27,7 @@ async function getPageInfo (url) {
 }
 
 async function getRawPage (url, requestMethod) {
-  const {content, response, error} = await request(encodeURI(url), requestMethod)
+  const {content, response, error} = await request(url, requestMethod)
   if (error) return processError(error)
 
   const contentLength = Buffer.byteLength(content)
