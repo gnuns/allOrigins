@@ -2,7 +2,7 @@
   "name": "allorigins",
   "description": "Pull contents from any page as JSON via API",
   "author": "Gabriel Nunes <gabriel@multiverso.me>",
-  "version": "2.0.7",
+  "version": "2.0.8",
   "main": "server.js",
   "license": "MIT",
   "scripts": {
