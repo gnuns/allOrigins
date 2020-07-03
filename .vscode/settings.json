@@ -1,7 +1,0 @@
-{
-  "files.autoSave": "onFocusChange",
-  "eslint.format.enable": true,
-  "eslint.codeAction.disableRuleComment": {},
-  "eslint.run": "onSave",
-  "eslint.workingDirectories": []
-}
