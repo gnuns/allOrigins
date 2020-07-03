@@ -1,4 +1,4 @@
-const getPage  = require('./get-page')
+const getPage = require('./get-page')
 
 module.exports = processRequest
 
@@ -17,7 +17,7 @@ function parseParams (req) {
   const params = {
     requestMethod: req.method,
     ...req.query,
-    ...req.params
+    ...req.params,
   }
   params.requestMethod = parseRequestMethod(params.requestMethod)
   params.format = (params.format || 'json').toLowerCase()
@@ -40,11 +40,12 @@ function createResponse (page, params, res, startTime) {
     return res.send(page.content)
   }
 
-  if (params.charset) res.set('Content-Type', `application/json; charset=${params.charset}`)
-  else res.set('Content-Type', 'application/json')
+  if (params.charset) {
+res.set('Content-Type', `application/json; charset=${params.charset}`)
+} else res.set('Content-Type', 'application/json')
 
-  if (page.status) page.status.response_time = (new Date() - startTime)
-  else page.response_time = (new Date() - startTime)
+  if (page.status) page.status.response_time = new Date() - startTime
+  else page.response_time = new Date() - startTime
 
   if (params.callback) return res.jsonp(page)
   return res.send(JSON.stringify(page))
