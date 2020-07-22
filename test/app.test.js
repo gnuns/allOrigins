@@ -1,23 +1,25 @@
 const request = require('supertest')
 const nock = require('nock')
 const app = require('../app.js')
-
-
+const redis = require('../redis')
 
 beforeAll(() => {
   nock('http://example.com')
-  .persist()
-  .get('/test.html')
-  .reply(200, 'Hi, allOrigins!')
+    .persist()
+    .get('/test.html')
+    .reply(200, 'Hi, allOrigins!')
 
-  .get('/not-found.html')
-  .reply(404, 'not found!')
+    .get('/not-found.html')
+    .reply(404, 'not found!')
 
-  .post('/test.html')
-  .reply(200, "Hi, allOrigins! It's a POST!")
+    .post('/test.html')
+    .reply(200, "Hi, allOrigins! It's a POST!")
 
-  .head('/test.html')
-  .reply(204, undefined, {'Content-Type': 'text/html', 'Content-Length': 'invalid'})
+    .head('/test.html')
+    .reply(204, undefined, {
+      'Content-Type': 'text/html',
+      'Content-Length': 'invalid',
+    })
 })
 
 test('global.AO_VERSION is defined', () => {
@@ -49,7 +51,9 @@ test('Test POST to /get endpoint', async (done) => {
 })
 
 test('Test /get request to not found url', async (done) => {
-  const res = await request(app).get('/get?url=http://example.com/not-found.html')
+  const res = await request(app).get(
+    '/get?url=http://example.com/not-found.html'
+  )
 
   expect(res.statusCode).toBe(200)
 
@@ -93,9 +97,15 @@ test('Test OPTIONS request', async (done) => {
   expect(res.statusCode).toBe(200)
   // 'cause we accept requests from allOrigins :D
   expect(res.headers['access-control-allow-origin']).toBe(RANDOM_ORIGIN)
-  expect(res.headers['access-control-allow-methods']).toBe('OPTIONS, GET, POST, PATCH, PUT, DELETE')
+  expect(res.headers['access-control-allow-methods']).toBe(
+    'OPTIONS, GET, POST, PATCH, PUT, DELETE'
+  )
 
   expect(res.body.contents).toBeUndefined()
 
   done()
+})
+
+afterAll(() => {
+  redis.closeInstance()
 })
