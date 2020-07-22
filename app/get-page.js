@@ -57,27 +57,23 @@ async function getPageContents (url, requestMethod) {
 
 async function request (url, requestMethod) {
   try {
-    let options, response
+    let response
+    const options = {
+      method: requestMethod,
+      encoding: null,
+      headers: {
+        'user-agent': process.env.USER_AGENT || DEFAULT_USER_AGENT,
+      },
+    }
     const dat = await redisGet(url + requestMethod)
     if (dat) {
       const {body, etag: e} = JSON.parse(dat)
 
-      options = {
-        method: requestMethod,
-        encoding: null,
-        headers: {
-          'user-agent': process.env.USER_AGENT || DEFAULT_USER_AGENT,
-          'if-none-match': e,
-        },
-      }
+      options.headers['if-none-match'] = e
+
       response = await got(url, options)
       response.body = Buffer.from(body)
       return processContent(response)
-    }
-    options = {
-      method: requestMethod,
-      encoding: null,
-      headers: {'user-agent': process.env.USER_AGENT || DEFAULT_USER_AGENT},
     }
 
     response = await got(url, options)
