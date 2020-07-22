@@ -60,8 +60,7 @@ async function request (url, requestMethod) {
     let options, response
     const dat = await redisGet(url + requestMethod)
     if (dat) {
-      const body = JSON.parse(dat).body
-      const e = JSON.parse(dat).etag
+      const {body, etag: e} = JSON.parse(dat)
 
       options = {
         method: requestMethod,
