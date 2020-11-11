@@ -7,6 +7,11 @@ beforeAll(() => {
     .persist(true)
     .get('/test.html')
     .reply(200, 'Hi, allOrigins!', {
+      'Content-Type': 'text/html',
+    })
+
+    .get('/test.txt')
+    .reply(200, 'Hello, allOrigins! 👽', {
       'Content-Type': 'text/plain',
     })
 
@@ -77,6 +82,30 @@ test('Test /raw request', async (done) => {
   done()
 })
 
+test('Test /get request with charset param', async (done) => {
+  const res = await request(app).get(
+    '/get?url=http://example.com/test.txt&charset=big5'
+  )
+
+  expect(res.statusCode).toBe(200)
+  expect(res.headers['content-type']).toBe('application/json; charset=big5')
+
+  expect(res.body.contents).toBe('Hello, allOrigins! 👽')
+  done()
+})
+
+test('Test /get request with callback param', async (done) => {
+  const res = await request(app).get(
+    '/get?url=http://example.com/test.txt&callback=myFunc'
+  )
+
+  expect(res.statusCode).toBe(200)
+  expect(res.headers['content-type']).toBe('text/javascript; charset=utf-8')
+
+  expect(res.text).toMatch(/myFunc\(\{.+\}\)/gi)
+  done()
+})
+
 test('Test /info request', async (done) => {
   const res = await request(app).get('/info?url=http://example.com/test.html')
 
@@ -105,4 +134,59 @@ test('Test OPTIONS request', async (done) => {
   expect(res.body.contents).toBeUndefined()
 
   done()
+})
+
+describe.each([
+  ['without cacheMaxAge', '', '3600'],
+  ['with a valid cacheMaxAge', '342', '342'],
+  ['with an invalid cacheMaxAge', 'not-valid', '3600'],
+  ['with a cacheMaxAge < MIN_CACHE_TIME', '142', '300'],
+])('%s', (_, param, expected) => {
+  test('Test /raw request', async (done) => {
+    const res = await request(app).get(
+      `/raw?url=http://example.com/test.html&cacheMaxAge=${param}`
+    )
+
+    expect(res.statusCode).toBe(200)
+    expect(res.headers['cache-control']).toBe(
+      `public, max-age=${expected}, stale-if-error=600`
+    )
+
+    expect(res.body.contents).toBeUndefined()
+    expect(res.body.status).toBeUndefined()
+    expect(res.text).toBe('Hi, allOrigins!')
+    done()
+  })
+
+  test('Test /get request', async (done) => {
+    const res = await request(app).get(
+      `/get?url=http://example.com/test.html&cacheMaxAge=${param}`
+    )
+
+    expect(res.statusCode).toBe(200)
+    expect(res.headers['cache-control']).toBe(
+      `public, max-age=${expected}, stale-if-error=600`
+    )
+
+    expect(res.body.contents).toBeDefined()
+    expect(res.body.status).toBeDefined()
+    expect(res.body.status.content_length).toBe(15)
+
+    done()
+  })
+
+  test('Test POST to /json endpoint', async (done) => {
+    const res = await request(app).post(
+      `/json?url=http://example.com/test.html&cacheMaxAge=${param}`
+    )
+
+    expect(res.statusCode).toBe(200)
+    expect(res.headers['cache-control']).toBeUndefined()
+
+    expect(res.body.contents).toBeDefined()
+    expect(res.body.contents).toBe("Hi, allOrigins! It's a POST!")
+    expect(res.body.status).toBeDefined()
+
+    done()
+  })
 })

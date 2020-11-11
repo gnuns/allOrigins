@@ -1,5 +1,8 @@
 const getPage = require('./get-page')
 
+const DEFAULT_CACHE_TIME = 60 * 60 // 60 minutes
+const MIN_CACHE_TIME = 5 * 60 // 5 minutes
+
 module.exports = processRequest
 
 async function processRequest(req, res) {
@@ -36,19 +39,28 @@ function parseRequestMethod(method) {
 }
 
 function createResponse(page, params, res, startTime) {
+  if (['GET', 'HEAD'].includes(params.requestMethod)) {
+    res.set(
+      'Cache-control',
+      `public, max-age=${Math.max(
+        MIN_CACHE_TIME,
+        Number(params.cacheMaxAge) || DEFAULT_CACHE_TIME
+      )}, stale-if-error=600`
+    )
+  }
+
   if (params.format === 'raw' && !(page.status || {}).error) {
-    if (page.contentType) {
-      res.set('Content-Length', `${page.contentLength}`)
-      res.set('Content-Type', `${page.contentType}`)
-    }
+    res.set({
+      'Content-Length': page.contentLength,
+      'Content-Type': page.contentType,
+    })
     return res.send(page.content)
   }
 
-  if (params.charset) {
-    res.set('Content-Type', `application/json; charset=${params.charset}`)
-  } else {
-    res.set('Content-Type', 'application/json')
-  }
+  res.set(
+    'Content-Type',
+    `application/json; charset=${params.charset || 'utf-8'}`
+  )
 
   if (page.status) {
     page.status.response_time = new Date() - startTime
@@ -60,5 +72,5 @@ function createResponse(page, params, res, startTime) {
     return res.jsonp(page)
   }
 
-  return res.send(JSON.stringify(page))
+  return res.send(Buffer.from(JSON.stringify(page)))
 }
