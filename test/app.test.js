@@ -1,15 +1,14 @@
-const uWS = require('uWebSockets.js')
 const request = require('supertest')
 const nock = require('nock')
 const app = require('../app.js')
 
-const env = { port: process.env.PORT || 30002, socket: null }
-
 beforeAll(() => {
   nock('http://example.com')
-    .persist()
+    .persist(true)
     .get('/test.html')
-    .reply(200, 'Hi, allOrigins!')
+    .reply(200, 'Hi, allOrigins!', {
+      'Content-Type': 'text/plain',
+    })
 
     .get('/not-found.html')
     .reply(404, 'not found!')
@@ -22,18 +21,6 @@ beforeAll(() => {
       'Content-Type': 'text/html',
       'Content-Length': 'invalid',
     })
-
-  app.listen(env.port, (token) => {
-    env.socket = token
-    if (!token) {
-      console.log('Failed to listen to port ' + port)
-    }
-  })
-  app.address = () => ({ port: env.port })
-})
-afterAll(() => {
-  uWS.us_listen_socket_close(env.socket)
-  env.socket = null
 })
 
 test('global.AO_VERSION is defined', () => {

@@ -1,7 +1,3 @@
-// agent: {
-// 	http: new HttpAgent(),
-// 	https: new HttpsAgent()
-// }
 const HttpAgent = require('agentkeepalive')
 const QuickLRU = require('quick-lru')
 const got = require('got')
