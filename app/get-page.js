@@ -1,6 +1,4 @@
-const got = require('got')
-
-const DEFAULT_USER_AGENT = `Mozilla/5.0 (compatible; allOrigins/${global.AO_VERSION}; +http://allorigins.win/)`
+const { got } = require('./http-client')
 
 module.exports = getPage
 
@@ -27,7 +25,7 @@ async function getPageInfo(url) {
 }
 
 async function getRawPage(url, requestMethod) {
-  const { content, response, error } = await request(url, requestMethod)
+  const { content, response, error } = await request(url, requestMethod, true)
   if (error) return processError(error)
 
   const contentLength = Buffer.byteLength(content)
@@ -54,12 +52,11 @@ async function getPageContents(url, requestMethod) {
   }
 }
 
-async function request(url, requestMethod) {
+async function request(url, requestMethod, raw = false) {
   try {
     const options = {
       method: requestMethod,
-      responseType: 'buffer',
-      headers: { 'user-agent': process.env.USER_AGENT || DEFAULT_USER_AGENT },
+      decompress: !raw,
     }
 
     const response = await got(url, options)

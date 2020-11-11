@@ -13,27 +13,45 @@ global.AO_VERSION = version
 
 const processRequest = require('./app/process-request')
 
-const app = express()
+// const app = express()
 
-app.set('case sensitive routing', false)
-app.disable('x-powered-by')
-app.use(enableCORS)
+// app.set('case sensitive routing', false)
+// app.disable('x-powered-by')
+// app.use(enableCORS)
 
-app.all('/:format', processRequest)
+// app.all('/:format', processRequest)
 
-function enableCORS(req, res, next) {
-  res.header('Access-Control-Allow-Origin', req.headers.origin || '*')
-  res.header('Access-Control-Allow-Credentials', true)
-  res.header(
+function setBaseHeaders(req, res) {
+  res.writeStatus('200 OK')
+  res.writeHeader('Access-Control-Allow-Origin', req.getHeader('origin') || '*')
+  res.writeHeader('Access-Control-Allow-Credentials', 'true')
+  res.writeHeader(
     'Access-Control-Allow-Headers',
     'Origin, X-Requested-With, Content-Type, Content-Encoding, Accept'
   )
-  res.header(
+  res.writeHeader(
     'Access-Control-Allow-Methods',
     'OPTIONS, GET, POST, PATCH, PUT, DELETE'
   )
-  res.header('Via', `allOrigins v${version}`)
-  next()
+  res.writeHeader('Via', `allOrigins v${version}`)
 }
+
+const uWS = require('uWebSockets.js')
+
+const app = uWS.App({}).any('/:format', (res, req) => {
+  res.onAborted(() => {
+    try {
+      res.tryEnd()
+    } catch(_){}
+  })
+
+  return res.cork(async () => {
+    setBaseHeaders(req, res)
+    const format = req.getParameter(0)
+    req.format = format
+    await processRequest({ req, res }).catch((e) => console.error({ e }))
+    res.end();
+  })
+})
 
 module.exports = app
