@@ -40,13 +40,14 @@ function parseRequestMethod(method) {
 
 function createResponse(page, params, res, startTime) {
   if (['GET', 'HEAD'].includes(params.requestMethod)) {
-    res.set(
-      'Cache-control',
-      `public, max-age=${Math.max(
-        MIN_CACHE_TIME,
-        Number(params.cacheMaxAge) || DEFAULT_CACHE_TIME
-      )}, stale-if-error=600`
-    )
+    const maxAge = params.disableCache
+      ? 0
+      : Math.max(
+          MIN_CACHE_TIME,
+          Number(params.cacheMaxAge) || DEFAULT_CACHE_TIME
+        )
+
+    res.set('Cache-control', `public, max-age=${maxAge}, stale-if-error=600`)
   }
 
   if (params.format === 'raw' && !(page.status || {}).error) {

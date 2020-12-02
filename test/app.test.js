@@ -136,6 +136,40 @@ test('Test OPTIONS request', async (done) => {
   done()
 })
 
+test('with disableCache', async (done) => {
+  const res = await request(app).get(
+    `/get?url=http://example.com/test.html&disableCache=true`
+  )
+
+  expect(res.statusCode).toBe(200)
+  expect(res.headers['cache-control']).toBe(
+    `public, max-age=0, stale-if-error=600`
+  )
+
+  expect(res.body.contents).toBeDefined()
+  expect(res.body.status).toBeDefined()
+  expect(res.body.status.content_length).toBe(15)
+
+  done()
+})
+
+test('with disableCache and valid cacheMaxAge', async (done) => {
+  const res = await request(app).get(
+    `/get?url=http://example.com/test.html&disableCache=true&cacheMaxAge=1000`
+  )
+
+  expect(res.statusCode).toBe(200)
+  expect(res.headers['cache-control']).toBe(
+    `public, max-age=0, stale-if-error=600`
+  )
+
+  expect(res.body.contents).toBeDefined()
+  expect(res.body.status).toBeDefined()
+  expect(res.body.status.content_length).toBe(15)
+
+  done()
+})
+
 describe.each([
   ['without cacheMaxAge', '', '3600'],
   ['with a valid cacheMaxAge', '342', '342'],
