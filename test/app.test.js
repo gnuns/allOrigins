@@ -15,6 +15,11 @@ beforeAll(() => {
       'Content-Type': 'text/plain',
     })
 
+    .get('/cn.txt')
+    .reply(200, Buffer.from('C4E3BAC3CAC0BDE7A3A1', 'hex'), {
+      'Content-Type': 'text/plain',
+    })
+
     .get('/not-found.html')
     .reply(404, 'not found!')
 
@@ -84,13 +89,25 @@ test('Test /raw request', async (done) => {
 
 test('Test /get request with charset param', async (done) => {
   const res = await request(app).get(
-    '/get?url=http://example.com/test.txt&charset=big5'
+    '/get?url=http://example.com/test.txt&charset=utf-8'
   )
 
   expect(res.statusCode).toBe(200)
-  expect(res.headers['content-type']).toBe('application/json; charset=big5')
+  expect(res.headers['content-type']).toBe('application/json; charset=utf-8')
 
   expect(res.body.contents).toBe('Hello, allOrigins! 👽')
+  done()
+})
+
+test('Test /get request with charset param (CN)', async (done) => {
+  const res = await request(app).get(
+    '/get?url=http://example.com/cn.txt&charset=gbk'
+  )
+
+  expect(res.statusCode).toBe(200)
+  expect(res.headers['content-type']).toBe('application/json; charset=gbk')
+
+  expect(res.body.contents).toBe('你好世界！')
   done()
 })
 

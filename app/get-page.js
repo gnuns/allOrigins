@@ -1,15 +1,16 @@
 const { got } = require('./http-client')
+const iconv = require('iconv-lite')
 
 module.exports = getPage
 
-function getPage({ url, format, requestMethod }) {
+function getPage({ url, format, requestMethod, charset }) {
   if (format === 'info' || requestMethod === 'HEAD') {
     return getPageInfo(url)
   } else if (format === 'raw') {
-    return getRawPage(url, requestMethod)
+    return getRawPage(url, requestMethod, charset)
   }
 
-  return getPageContents(url, requestMethod)
+  return getPageContents(url, requestMethod, charset)
 }
 
 async function getPageInfo(url) {
@@ -24,8 +25,13 @@ async function getPageInfo(url) {
   }
 }
 
-async function getRawPage(url, requestMethod) {
-  const { content, response, error } = await request(url, requestMethod, true)
+async function getRawPage(url, requestMethod, charset) {
+  const { content, response, error } = await request(
+    url,
+    requestMethod,
+    true,
+    charset
+  )
   if (error) return processError(error)
 
   const contentLength = Buffer.byteLength(content)
@@ -36,8 +42,13 @@ async function getRawPage(url, requestMethod) {
   }
 }
 
-async function getPageContents(url, requestMethod) {
-  const { content, response, error } = await request(url, requestMethod)
+async function getPageContents(url, requestMethod, charset) {
+  const { content, response, error } = await request(
+    url,
+    requestMethod,
+    false,
+    charset
+  )
   if (error) return processError(error)
 
   const contentLength = Buffer.byteLength(content)
@@ -52,7 +63,7 @@ async function getPageContents(url, requestMethod) {
   }
 }
 
-async function request(url, requestMethod, raw = false) {
+async function request(url, requestMethod, raw = false, charset = null) {
   try {
     const options = {
       method: requestMethod,
@@ -62,14 +73,17 @@ async function request(url, requestMethod, raw = false) {
     const response = await got(url, options)
     if (options.method === 'HEAD') return { response }
 
-    return processContent(response)
+    return processContent(response, charset)
   } catch (error) {
     return { error }
   }
 }
 
-async function processContent(response) {
+async function processContent(response, charset) {
   const res = { response: response, content: response.body }
+  if (charset && iconv.encodingExists(charset)) {
+    res.content = iconv.decode(res.content, charset)
+  }
   return res
 }
 
