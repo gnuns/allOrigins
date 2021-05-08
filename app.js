@@ -33,6 +33,7 @@ module.exports = (function app() {
   app.set('case sensitive routing', false)
   app.set('jsonp callback name', 'callback')
   app.disable('x-powered-by')
+  app.enable("trust proxy")
   app.use(enableCORS)
 
   app.all('/:format', processRequest)

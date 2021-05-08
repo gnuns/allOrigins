@@ -1,4 +1,5 @@
 const getPage = require('./get-page')
+const logger = require('./logger')
 
 const DEFAULT_CACHE_TIME = 60 * 60 // 60 minutes
 const MIN_CACHE_TIME = 5 * 60 // 5 minutes
@@ -15,7 +16,20 @@ async function processRequest(req, res) {
 
   const page = await getPage(params)
 
-  return createResponse(page, params, res, startTime)
+  return createResponse(page, params, res, startTime).then((resPage) => {
+    logger.requestProcessed({
+      format: params.format,
+      headers: req.headers,
+      status: {
+        ...(typeof resPage.status !== 'object'
+          ? {
+              response_time: new Date() - startTime,
+            }
+          : resPage.status),
+        url: params.url,
+      },
+    })
+  })
 }
 
 function parseParams(req) {
@@ -38,7 +52,7 @@ function parseRequestMethod(method) {
   return 'GET'
 }
 
-function createResponse(page, params, res, startTime) {
+async function createResponse(page, params, res, startTime) {
   if (['GET', 'HEAD'].includes(params.requestMethod)) {
     const maxAge = params.disableCache
       ? 0
@@ -73,5 +87,6 @@ function createResponse(page, params, res, startTime) {
     return res.jsonp(page)
   }
 
-  return res.send(Buffer.from(JSON.stringify(page)))
+  res.send(Buffer.from(JSON.stringify(page)))
+  return page
 }
