@@ -1,5 +1,5 @@
 const HttpAgent = require('agentkeepalive')
-const QuickLRU = require('quick-lru')
+const QuickLRU = require('../vendor/quick-lru')
 const got = require('got')
 
 const DEFAULT_USER_AGENT = `Mozilla/5.0 (compatible; allOrigins/${global.AO_VERSION}; +http://allorigins.win/)`
