@@ -7,8 +7,7 @@ module.exports = (function () {
   return {
     requestProcessed(data) {
       if (!logger) return
-      const to = data.status.url && new URL(data.status.url)
-      const from = data.headers['origin'] && new URL(data.headers['origin'])
+      const [to, from] = parseURLs(data);
 
       delete data.headers['host']
 
@@ -21,6 +20,17 @@ module.exports = (function () {
     },
   }
 })()
+
+function parseURLs(data) {
+  try {
+    const to = data.status.url && new URL(data.status.url)
+    const from = data.headers['origin'] && new URL(data.headers['origin'])
+
+    return [to, from];
+  } catch(_) {
+    return [data.status.url, data.headers['origin']];
+  }
+}
 
 function getLogDNA() {
   const logger = createLogger(process.env.LOGDNA_KEY, {
