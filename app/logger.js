@@ -7,7 +7,7 @@ module.exports = (function () {
   return {
     requestProcessed(data) {
       if (!logger) return
-      const [to, from] = parseURLs(data);
+      const [to, from] = parseURLs(data)
 
       delete data.headers['host']
 
@@ -26,9 +26,9 @@ function parseURLs(data) {
     const to = data.status.url && new URL(data.status.url)
     const from = data.headers['origin'] && new URL(data.headers['origin'])
 
-    return [to, from];
-  } catch(_) {
-    return [data.status.url, data.headers['origin']];
+    return [to, from]
+  } catch (_) {
+    return [data.status.url, data.headers['origin']]
   }
 }
 
