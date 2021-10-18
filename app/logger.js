@@ -5,16 +5,20 @@ module.exports = function (debug = false) {
     logger,
     requestProcessed(data) {
       if (!this.logger) return false
-      const [to, from] = parseURLs(data)
+      try {
+        const [to, from] = parseURLs(data)
 
-      delete data.headers['host']
+        delete data.headers['host']
 
-      return this.logger.log(data, {
-        meta: {
-          to: to?.hostname,
-          from: from?.hostname || 'browser',
-        },
-      })
+        return this.logger.log(data, {
+          meta: {
+            to: to?.hostname,
+            from: from?.hostname || 'browser',
+          },
+        })
+      } catch (e) {
+        return e
+      }
     },
   }
 }

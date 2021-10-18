@@ -36,7 +36,7 @@ module.exports = (function app() {
   app.enable("trust proxy")
   app.use(enableCORS)
 
-  app.all('/:format', processRequest)
+  app.all('/:format(get|raw|json|info)', processRequest)
 
   return app
 })()
