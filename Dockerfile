@@ -6,6 +6,6 @@ COPY ./.yarnrc.yml /usr/src/app/
 COPY ./yarn.lock /usr/src/app/
 COPY ./.yarn/ /usr/src/app/.yarn
 ENV NODE_ENV production
-RUN yarn install
+RUN yarn install --immutable
 COPY . /usr/src/app
 CMD [ "npm", "run", "start" ]

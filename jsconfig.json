@@ -5,5 +5,8 @@
     "paths": {
       "~/*": ["app/*"]
     }
+  },
+  "typeAcquisition": {
+    "include": ["jest"]
   }
 }

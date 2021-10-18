@@ -1,5 +1,7 @@
 const getPage = require('./get-page')
-const logger = require('./logger')
+const getLogger = require('./logger')
+
+const logger = getLogger(process.env.DEBUG && process.env.DEBUG !== '0')
 
 const DEFAULT_CACHE_TIME = 60 * 60 // 60 minutes
 const MIN_CACHE_TIME = 5 * 60 // 5 minutes
