@@ -1,4 +1,4 @@
-FROM node:current-slim
+FROM node:16-slim
 RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY ./package.json /usr/src/app/
